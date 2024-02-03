@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-import NewButton from "./new-button";
+import { NewButton } from "./new-button";
 
 export const Sidebar = () => {
   return (
