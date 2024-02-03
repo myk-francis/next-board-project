@@ -5,6 +5,7 @@ interface DashboardLayoutProps {
 import React from "react";
 import { Sidebar } from "./_components/sidebar";
 import { OrgSidebar } from "./_components/org-sidebar";
+import { NavBar } from "./_components/navbar";
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
@@ -14,7 +15,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="h-full flex gap-x-3">
           <OrgSidebar />
           <div className="h-full flex-1">
-            {/* Add NavBar */}
+            <NavBar />
             {children}
           </div>
         </div>
