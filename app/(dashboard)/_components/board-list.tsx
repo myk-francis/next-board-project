@@ -2,6 +2,7 @@
 
 import React from "react";
 import { EmptySearch } from "./empty-search";
+import { EmptyFavorites } from "./empty-favorites";
 
 interface BoardListProps {
   orgId: string;
@@ -19,7 +20,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
   }
 
   if (!data?.length && query?.favorites) {
-    return <div>No favorites</div>;
+    return <EmptyFavorites />;
   }
 
   if (!data?.length) {
