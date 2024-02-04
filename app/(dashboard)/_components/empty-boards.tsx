@@ -1,14 +1,18 @@
 import React from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
-export const EmptySearch = () => {
+export const EmptyBoards = () => {
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <Image src="/empty-search.svg" alt="Empty" height={140} width={140} />
-      <h2 className="text-2xl font-semibold mt-6">No results found!</h2>
+      <Image src="/notes.svg" alt="Empty" height={110} width={110} />
+      <h2 className="text-2xl font-semibold mt-6">Create your first board!</h2>
       <p className="text-muted-foreground text-sm mt-2">
-        Try searching something else
+        Start by creating a board for your organisation
       </p>
+      <div className="mt-6">
+        <Button size={"lg"}>Create Board</Button>
+      </div>
     </div>
   );
 };
