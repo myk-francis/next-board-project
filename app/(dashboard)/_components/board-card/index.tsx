@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Overlay } from "./overlay";
 
 interface BoardCardProps {
   id: string;
@@ -30,6 +31,7 @@ export const BoardCard = ({
       <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
         <div className="relative flex-1 bg-amber-50">
           <Image src={imageUrl} alt={title} className="object-fit" fill />
+          <Overlay />
         </div>
       </div>
     </Link>
