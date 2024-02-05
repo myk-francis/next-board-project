@@ -27,7 +27,8 @@ export const RenameModal = () => {
     setTitle(initialValues.title);
   }, [initialValues.title]);
 
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = () => {
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
     mutate({ id: initialValues.id, title })
       .then(() => {
         toast.success("Board renamed");
