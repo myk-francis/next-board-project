@@ -1,7 +1,8 @@
 import React from "react";
+import { Canvas } from "./_components/canvas";
 
 const BoardIdPage = () => {
-  return <div>BoardIdPage</div>;
+  return <Canvas />;
 };
 
 export default BoardIdPage;
