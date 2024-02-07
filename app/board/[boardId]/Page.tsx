@@ -10,7 +10,7 @@ interface BoardIdPageProps {
 
 const BoardIdPage = ({ params: { boardId } }: BoardIdPageProps) => {
   return (
-    <Room roomId={boardId}>
+    <Room roomId={boardId} fallback={<div>Loading...</div>}>
       <Canvas boardId={boardId} />
     </Room>
   );
