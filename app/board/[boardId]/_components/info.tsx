@@ -19,6 +19,10 @@ const font = Poppins({
   weight: ["600"],
 });
 
+const TabSeparator = () => {
+  return <div className="text-neutral-300 px-1.5">|</div>;
+};
+
 export const Info = ({ boardId }: InfoProps) => {
   const data = useQuery(api.board.getOne, { id: boardId as Id<"boards"> });
 
@@ -43,6 +47,8 @@ export const Info = ({ boardId }: InfoProps) => {
           </Link>
         </Button>
       </Hint>
+
+      <TabSeparator />
     </div>
   );
 };
