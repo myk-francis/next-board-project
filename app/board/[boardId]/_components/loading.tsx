@@ -2,6 +2,7 @@ import { Loader } from "lucide-react";
 import React from "react";
 import { Info } from "./info";
 import { Participants } from "./participants";
+import { ToolBar } from "./toolbar";
 
 export const Loading = () => {
   return (
@@ -9,6 +10,7 @@ export const Loading = () => {
       <Loader className="h-6 w-6 text-muted-foreground animate-spin" />
       <Info.Skeleton />
       <Participants.Skeleton />
+      <ToolBar.Skeleton />
     </main>
   );
 };
