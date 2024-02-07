@@ -10,7 +10,7 @@ interface BoardIdPageProps {
 const BoardIdPage = ({ params: { boardId } }: BoardIdPageProps) => {
   return (
     <div>
-      <Canvas />
+      <Canvas boardId={boardId} />
     </div>
   );
 };
