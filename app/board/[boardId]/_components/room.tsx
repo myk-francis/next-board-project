@@ -6,13 +6,12 @@ import { ClientSideSuspense } from "@liveblocks/react";
 
 import React from "react";
 
-export const Room = ({
-  children,
-  roomId,
-}: {
+interface RoomProps {
   children: ReactNode;
   roomId: string;
-}) => {
+}
+
+export const Room = ({ children, roomId }: RoomProps) => {
   return (
     <RoomProvider id={roomId} initialPresence={{}}>
       <ClientSideSuspense fallback={<div>Loading...</div>}>
