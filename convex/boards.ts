@@ -72,17 +72,3 @@ export const get = query({
     return boardsWithFavorites;
   },
 });
-
-export const getOne = query({
-  args: {
-    id: v.id("boards"),
-  },
-  handler: async (ctx, args) => {
-    const board = await ctx.db.get(args.id);
-
-    if (!board) {
-      throw new Error("Board not found");
-    }
-    return board;
-  },
-});

@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   }
 
   const { room } = await request.json();
-  const board = await convex.query(api.boards.getOne, { id: room });
+  const board = await convex.query(api.board.getOne, { id: room });
 
   console.log("liveblocks-auth 🚀 ~ POST ~ board:AUTH_INFO:", {
     room,
