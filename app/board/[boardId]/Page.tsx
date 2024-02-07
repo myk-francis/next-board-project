@@ -1,7 +1,13 @@
 import React from "react";
 import { Canvas } from "./_components/canvas";
 
-const BoardIdPage = () => {
+interface BoardIdPageProps {
+  params: {
+    boardId: string;
+  };
+}
+
+const BoardIdPage = ({ params: { boardId } }: BoardIdPageProps) => {
   return (
     <div>
       <Canvas />
