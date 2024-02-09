@@ -5,6 +5,7 @@ import { Info } from "./info";
 import { Participants } from "./participants";
 import { ToolBar } from "./toolbar";
 import { CanvasMode, CanvasState } from "@/types/canvas";
+import { useHistory, useCanRedo, useCanUndo } from "@/liveblocks.config";
 
 interface CanvasProps {
   boardId: string;
@@ -15,6 +16,10 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     mode: CanvasMode.None,
   });
 
+  const history = useHistory();
+  const canUndo = useCanUndo();
+  const canRedo = useCanRedo();
+
   return (
     <main className="h-full w-full bg-neutral-100 touch-none">
       <Info boardId={boardId} />
@@ -22,10 +27,10 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       <ToolBar
         canvasState={canvasState}
         setCanvasState={setCanvasState}
-        canUndo={false}
-        canRedo={false}
-        onUndo={() => {}}
-        onRedo={() => {}}
+        canUndo={canUndo}
+        canRedo={canRedo}
+        onUndo={history.undo}
+        onRedo={history.redo}
       />
     </main>
   );
