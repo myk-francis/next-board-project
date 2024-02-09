@@ -4,9 +4,11 @@ import {
   Circle,
   MousePointer2,
   Pencil,
+  Redo2,
   Square,
   StickyNote,
   Type,
+  Undo,
 } from "lucide-react";
 
 export const ToolBar = () => {
@@ -51,8 +53,20 @@ export const ToolBar = () => {
         />
       </div>
       <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">
-        <div>Undo</div>
-        <div>Redo</div>
+        <ToolButton
+          label="Undo"
+          icon={Undo}
+          onClick={() => {}}
+          isActive={false}
+          isDisabled={true}
+        />
+        <ToolButton
+          label="Redo"
+          icon={Redo2}
+          onClick={() => {}}
+          isActive={false}
+          isDisabled={true}
+        />
       </div>
     </div>
   );
