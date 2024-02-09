@@ -10,8 +10,8 @@ import {
   Type,
   Undo,
 } from "lucide-react";
+import { CanvasState } from "@/types/canvas";
 
-type CanvasState = any;
 interface ToolBarProps {
   canvasState: CanvasState;
   setCanvasState: (newState: CanvasState) => void;
