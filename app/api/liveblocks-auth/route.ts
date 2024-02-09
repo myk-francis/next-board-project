@@ -15,10 +15,10 @@ export async function POST(request: Request) {
   const authorization = await auth();
   const user = await currentUser();
 
-  console.log("liveblocks-auth 🚀 ~ POST ~ user:AUTH_INFO:", {
-    authorization,
-    user,
-  });
+  // console.log("liveblocks-auth 🚀 ~ POST ~ user:AUTH_INFO:", {
+  //   authorization,
+  //   user,
+  // });
 
   if (!user || !authorization) {
     return new Response("Unauthorized", { status: 403 });
