@@ -126,6 +126,20 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     []
   );
 
+  const onPointerUp = useMutation(
+    ({}, e: React.PointerEvent) => {
+      const point = pointerEventToCanvasPoint(e, camera);
+      if (canvasState.mode === CanvasMode.Inserting) {
+        insertLayer(canvasState.layerType, point);
+      } else {
+        setCanvasState({ mode: CanvasMode.None });
+      }
+
+      history.resume();
+    },
+    [camera, canvasState, history, insertLayer]
+  );
+
   return (
     <main className="h-full w-full bg-neutral-100 touch-none">
       <Info boardId={boardId} />
@@ -142,6 +156,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         onWheel={onWheel}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
+        onPointerUp={onPointerUp}
         className="h-[100vh] w-[100vw]"
       >
         <g style={{ transform: `translate(${camera.x}px, ${camera.y}px)` }}>
