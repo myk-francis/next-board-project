@@ -71,7 +71,11 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         onUndo={history.undo}
         onRedo={history.redo}
       />
-      <svg className="h-[100vh] w-[100vw]">
+      <svg
+        onWheel={onWheel}
+        onPointerMove={onPointerMove}
+        className="h-[100vh] w-[100vw]"
+      >
         <g>
           <CursorsPresence />
         </g>
