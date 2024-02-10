@@ -10,11 +10,11 @@ export type Camera = {
 };
 
 export enum LayerType {
-  Rectangle,
   Ellipse,
   Text,
   Path,
   Note,
+  Rectangle,
 }
 
 export type RectangleLayer = {

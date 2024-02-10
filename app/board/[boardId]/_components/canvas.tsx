@@ -128,7 +128,9 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   );
 
   const onPointerUp = useMutation(
-    ({}, e: React.PointerEvent) => {
+    ({}, e) => {
+      // e.preventDefault();
+
       const point = pointerEventToCanvasPoint(e, camera);
       if (canvasState.mode === CanvasMode.Inserting) {
         insertLayer(canvasState.layerType, point);

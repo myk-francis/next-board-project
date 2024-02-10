@@ -78,12 +78,12 @@ export const ToolBar = ({
           onClick={() =>
             setCanvasState({
               mode: CanvasMode.Inserting,
-              layerType: LayerType.Reactangle,
+              layerType: LayerType.Rectangle,
             })
           }
           isActive={
             canvasState.mode === CanvasMode.Inserting &&
-            canvasState.layerType === LayerType.Reactangle
+            canvasState.layerType === LayerType.Rectangle
           }
         />
         <ToolButton
