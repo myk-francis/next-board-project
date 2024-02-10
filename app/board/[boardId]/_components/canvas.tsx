@@ -4,7 +4,14 @@ import React, { useCallback, useState } from "react";
 import { Info } from "./info";
 import { Participants } from "./participants";
 import { ToolBar } from "./toolbar";
-import { Camera, CanvasMode, CanvasState, Color } from "@/types/canvas";
+import {
+  Camera,
+  CanvasMode,
+  CanvasState,
+  Color,
+  LayerType,
+  Point,
+} from "@/types/canvas";
 import {
   useHistory,
   useCanRedo,
@@ -32,11 +39,33 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     x: 0,
     y: 0,
   });
-  const [lastUsedColor, setLastUsedColor] = useState<Color>();
+  const [lastUsedColor, setLastUsedColor] = useState<Color>({
+    r: 0,
+    g: 0,
+    b: 0,
+  });
 
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  const insertLayer = useMutation(
+    (
+      { storage, setMyPresence },
+      layerType:
+        | LayerType.Ellipse
+        | LayerType.Text
+        | LayerType.Rectangle
+        | LayerType.Note,
+      position: Point
+    ) => {
+      // e.preventDefault();
+      // setMyPresence({
+      //   cursor: current,
+      // });
+    },
+    []
+  );
 
   const onWheel = useCallback((e: React.WheelEvent) => {
     // e.preventDefault();
