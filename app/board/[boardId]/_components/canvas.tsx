@@ -5,7 +5,12 @@ import { Info } from "./info";
 import { Participants } from "./participants";
 import { ToolBar } from "./toolbar";
 import { CanvasMode, CanvasState } from "@/types/canvas";
-import { useHistory, useCanRedo, useCanUndo } from "@/liveblocks.config";
+import {
+  useHistory,
+  useCanRedo,
+  useCanUndo,
+  useMutation,
+} from "@/liveblocks.config";
 import { CursorsPresence } from "./cursors-presence";
 
 interface CanvasProps {
@@ -17,9 +22,27 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     mode: CanvasMode.None,
   });
 
+  const [camera, setCamera] = useState({
+    x: 0,
+    y: 0,
+  });
+
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  const onPointerMove = useMutation(
+    ({ setMyPresence }, e: React.PointerEvent) => {
+      e.preventDefault();
+
+      const current = { x: 0, y: 0 };
+
+      setMyPresence({
+        cursor: current,
+      });
+    },
+    []
+  );
 
   return (
     <main className="h-full w-full bg-neutral-100 touch-none">
