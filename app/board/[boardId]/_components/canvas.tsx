@@ -23,6 +23,7 @@ import { CursorsPresence } from "./cursors-presence";
 import { pointerEventToCanvasPoint } from "@/lib/utils";
 import { nanoid } from "nanoid";
 import { LiveObject } from "@liveblocks/client";
+import { LayerPreview } from "./layer-preview";
 
 const MAX_LAYERS = 200;
 
@@ -160,6 +161,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         className="h-[100vh] w-[100vw]"
       >
         <g style={{ transform: `translate(${camera.x}px, ${camera.y}px)` }}>
+          {layerIds.map((layerId) => (
+            <LayerPreview
+              key={layerId}
+              id={layerId}
+              onLayerPointerDown={() => {}}
+              selectionColor={null}
+            />
+          ))}
           <CursorsPresence />
         </g>
       </svg>
