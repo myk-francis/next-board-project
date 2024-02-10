@@ -20,11 +20,11 @@ const Cursors = () => {
 
 export const CursorsPresence = memo(() => {
   return (
-    <div>
+    <>
       {/* TODO: Draft pencil */}
       <Cursors />
-    </div>
+    </>
   );
 });
 
-CursorsPresence.displayName = "";
+CursorsPresence.displayName = "CursorsPresence";

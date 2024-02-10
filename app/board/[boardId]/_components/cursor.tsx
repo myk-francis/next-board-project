@@ -21,11 +21,12 @@ export const Cursor = memo(({ connectionId }: CursorProps) => {
 
   const { x, y } = cursor;
 
+  console.log({ x, y });
+
   return (
     <foreignObject
       style={{
-        //   pointerEvents: "none",
-        transform: `translate(${x}px, ${y}px)`,
+        transform: `translateX(${x}px) translateY(${y}px)`,
       }}
       height={50}
       width={50}
