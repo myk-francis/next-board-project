@@ -34,13 +34,6 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
   const onWheel = useCallback((e: React.WheelEvent) => {
     // e.preventDefault();
-    // if (e.ctrlKey) {
-    //   setCamera((c) => ({
-    //     x: c.x + e.deltaX,
-    //     y: c.y + e.deltaY,
-    //   }));
-    // }
-
     setCamera((c) => ({
       x: c.x - e.deltaX,
       y: c.y - e.deltaY,
@@ -49,7 +42,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
   const onPointerMove = useMutation(
     ({ setMyPresence }, e: React.PointerEvent) => {
-      e.preventDefault();
+      // e.preventDefault();
 
       const current = pointerEventToCanvasPoint(e, camera);
 
