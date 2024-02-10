@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Info } from "./info";
 import { Participants } from "./participants";
 import { ToolBar } from "./toolbar";
-import { CanvasMode, CanvasState } from "@/types/canvas";
+import { Camera, CanvasMode, CanvasState } from "@/types/canvas";
 import {
   useHistory,
   useCanRedo,
@@ -22,7 +22,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     mode: CanvasMode.None,
   });
 
-  const [camera, setCamera] = useState({
+  const [camera, setCamera] = useState<Camera>({
     x: 0,
     y: 0,
   });
@@ -30,6 +30,21 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  const onWheel = useCallback((e: React.WheelEvent) => {
+    // e.preventDefault();
+    // if (e.ctrlKey) {
+    //   setCamera((c) => ({
+    //     x: c.x + e.deltaX,
+    //     y: c.y + e.deltaY,
+    //   }));
+    // }
+
+    setCamera((c) => ({
+      x: c.x + e.deltaX,
+      y: c.y + e.deltaY,
+    }));
+  }, []);
 
   const onPointerMove = useMutation(
     ({ setMyPresence }, e: React.PointerEvent) => {
