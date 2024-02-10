@@ -4,21 +4,26 @@ import React, { useCallback, useState } from "react";
 import { Info } from "./info";
 import { Participants } from "./participants";
 import { ToolBar } from "./toolbar";
-import { Camera, CanvasMode, CanvasState } from "@/types/canvas";
+import { Camera, CanvasMode, CanvasState, Color } from "@/types/canvas";
 import {
   useHistory,
   useCanRedo,
   useCanUndo,
   useMutation,
+  useStorage,
 } from "@/liveblocks.config";
 import { CursorsPresence } from "./cursors-presence";
 import { pointerEventToCanvasPoint } from "@/lib/utils";
+
+const MAX_LAYERS = 200;
 
 interface CanvasProps {
   boardId: string;
 }
 
 export const Canvas = ({ boardId }: CanvasProps) => {
+  const layerIds = useStorage((root) => root.layerIds);
+
   const [canvasState, setCanvasState] = useState<CanvasState>({
     mode: CanvasMode.None,
   });
@@ -27,6 +32,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     x: 0,
     y: 0,
   });
+  const [lastUsedColor, setLastUsedColor] = useState<Color>();
 
   const history = useHistory();
   const canUndo = useCanUndo();
