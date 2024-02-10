@@ -21,6 +21,8 @@ import {
 } from "@/liveblocks.config";
 import { CursorsPresence } from "./cursors-presence";
 import { pointerEventToCanvasPoint } from "@/lib/utils";
+import { nanoid } from "nanoid";
+import { LiveObject } from "@liveblocks/client";
 
 const MAX_LAYERS = 200;
 
@@ -59,12 +61,37 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         | LayerType.Note,
       position: Point
     ) => {
-      // e.preventDefault();
-      // setMyPresence({
-      //   cursor: current,
-      // });
+      const liveLayers = storage.get("layers");
+      if (liveLayers.size >= MAX_LAYERS) {
+        return;
+      }
+
+      const liveLayerIds = storage.get("layerIds");
+      const layerId = nanoid();
+      const layer = new LiveObject({
+        type: layerType,
+        x: position.x,
+        y: position.y,
+        width: 100,
+        height: 100,
+        fill: lastUsedColor,
+      });
+
+      liveLayerIds.push(layerId);
+      liveLayers.set(layerId, layer);
+
+      setMyPresence(
+        {
+          selection: [layerId],
+        },
+        { addToHistory: true }
+      );
+
+      setCanvasState((c) => ({
+        mode: CanvasMode.None,
+      }));
     },
-    []
+    [lastUsedColor]
   );
 
   const onWheel = useCallback((e: React.WheelEvent) => {
