@@ -104,11 +104,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   );
 
   const resizeSelectedLayer = useMutation(
-    (
-      { storage, self },
-
-      point: Point
-    ) => {
+    ({ storage, self }, point: Point) => {
       if (canvasState.mode !== CanvasMode.Resizing) {
         return;
       }
@@ -149,13 +145,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       const current = pointerEventToCanvasPoint(e, camera);
 
       if (canvasState.mode === CanvasMode.Resizing) {
+        resizeSelectedLayer(current);
       }
 
       setMyPresence({
         cursor: current,
       });
     },
-    [canvasState]
+    [canvasState, resizeSelectedLayer, camera]
   );
 
   const onPointerLeave = useMutation(
