@@ -27,7 +27,7 @@ export const Rectangle = ({
       y={0}
       fill={"#000"}
       strokeWidth={1}
-      stroke="transparent"
+      stroke={selectionColor || "transparent"}
     />
   );
 };
