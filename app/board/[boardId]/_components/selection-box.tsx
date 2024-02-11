@@ -19,7 +19,7 @@ export const SelectionBox = memo(
 
     const isShowingHandles = useStorage(
       (root) =>
-        soleLayerId && root.layers.get(soleLayerId)?.type === LayerType.Path
+        soleLayerId && root.layers.get(soleLayerId)?.type !== LayerType.Path
     );
 
     const bounds = useSelectionBounds();
@@ -40,6 +40,29 @@ export const SelectionBox = memo(
           width={bounds.width}
           height={bounds.height}
         />
+
+        {isShowingHandles && (
+          <>
+            <rect
+              className="fill-white stroke-blue-500 stroke-1 "
+              x={0}
+              y={0}
+              style={{
+                cursor: "nwse-resize",
+                width: `${HANDLE_WIDTH}px`,
+                height: `${HANDLE_WIDTH}px`,
+                transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${
+                  bounds.y - HANDLE_WIDTH / 2
+                }px)`,
+              }}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                //TODO: Add resize handler
+                // onResizeHandlePointerDown("top-left", bounds);
+              }}
+            />
+          </>
+        )}
       </>
     );
   }
