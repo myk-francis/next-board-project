@@ -113,6 +113,9 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
       const current = pointerEventToCanvasPoint(e, camera);
 
+      if (canvasState.mode === CanvasMode.Resizing) {
+      }
+
       setMyPresence({
         cursor: current,
       });
