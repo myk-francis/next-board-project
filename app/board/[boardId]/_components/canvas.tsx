@@ -11,6 +11,8 @@ import {
   Color,
   LayerType,
   Point,
+  Side,
+  XYWH,
 } from "@/types/canvas";
 import {
   useHistory,
@@ -177,6 +179,19 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       });
     },
     [setCanvasState, camera, history, canvasState.mode]
+  );
+
+  const onResizeHandlePointerDown = useCallback(
+    (corner: Side, initialBounds: XYWH) => {
+      history.pause();
+
+      setCanvasState({
+        mode: CanvasMode.Resizing,
+        initialBounds,
+        corner,
+      });
+    },
+    [history]
   );
 
   const selections = useOthersMapped((other) => other.presence.selection);
