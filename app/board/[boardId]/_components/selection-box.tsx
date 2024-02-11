@@ -1,13 +1,16 @@
 "use client";
 
-import React from "react";
+import { Side, XYWH } from "@/types/canvas";
+import React, { memo } from "react";
 
 interface SelectionBoxProps {
-  onResizeHandlePointerDown: () => void;
+  onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }
 
-export const SelectionBox = ({
-  onResizeHandlePointerDown,
-}: SelectionBoxProps) => {
-  return <div>SelectionBox</div>;
-};
+export const SelectionBox = memo(
+  ({ onResizeHandlePointerDown }: SelectionBoxProps) => {
+    return <div>SelectionBox</div>;
+  }
+);
+
+SelectionBox.displayName = "SelectionBox";
