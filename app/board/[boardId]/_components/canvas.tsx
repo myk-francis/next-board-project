@@ -120,7 +120,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         cursor: current,
       });
     },
-    []
+    [canvasState]
   );
 
   const onPointerLeave = useMutation(
