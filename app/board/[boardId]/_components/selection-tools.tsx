@@ -16,16 +16,19 @@ export const SelectionTools = memo(
     const selection = useSelf((me) => me.presence.selection);
     const selectionBounds = useSelectionBounds();
 
-    const setFill = useMutation(({ storage }, fill: Color) => {
-      // e.preventDefault();
-      const liveLayers = storage.get("layers");
+    const setFill = useMutation(
+      ({ storage }, fill: Color) => {
+        // e.preventDefault();
+        const liveLayers = storage.get("layers");
 
-      setLastUsedColor(fill);
+        setLastUsedColor(fill);
 
-      selection.forEach((id) => {
-        liveLayers.get(id)?.set("fill", fill);
-      });
-    }, []);
+        selection.forEach((id) => {
+          liveLayers.get(id)?.set("fill", fill);
+        });
+      },
+      [selection, setLastUsedColor]
+    );
 
     if (!selectionBounds) {
       return null;
