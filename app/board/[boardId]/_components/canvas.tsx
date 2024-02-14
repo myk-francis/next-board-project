@@ -104,7 +104,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   );
 
   const unselectLayers = useMutation(({ self, setMyPresence }) => {
-    if (self.presence.selection.length === 0) {
+    if (self.presence.selection.length > 0) {
       setMyPresence(
         {
           selection: [],
