@@ -324,6 +324,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         onUndo={history.undo}
         onRedo={history.redo}
       />
+      <SelectionTools camera={camera} setLastUsedColor={setLastUsedColor} />
       <svg
         onWheel={onWheel}
         onPointerMove={onPointerMove}
