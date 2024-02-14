@@ -220,7 +220,13 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       // e.preventDefault();
 
       const point = pointerEventToCanvasPoint(e, camera);
-      if (canvasState.mode === CanvasMode.Inserting) {
+
+      if (
+        canvasState.mode === CanvasMode.None ||
+        canvasState.mode === CanvasMode.Pressing
+      ) {
+        setCanvasState({ mode: CanvasMode.None });
+      } else if (canvasState.mode === CanvasMode.Inserting) {
         insertLayer(canvasState.layerType, point);
       } else {
         setCanvasState({ mode: CanvasMode.None });
@@ -311,6 +317,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
         onPointerUp={onPointerUp}
+        onPointerDown={onPointerDown}
         className="h-[100vh] w-[100vw]"
       >
         <g style={{ transform: `translate(${camera.x}px, ${camera.y}px)` }}>
