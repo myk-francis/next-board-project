@@ -144,7 +144,12 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
       const current = pointerEventToCanvasPoint(e, camera);
 
-      if (canvasState.mode === CanvasMode.Resizing) {
+      if (canvasState.mode === CanvasMode.Translating) {
+        // setCamera((c) => ({
+        //   x: c.x + current.x - canvasState.initialPosition.x,
+        //   y: c.y + current.y - canvasState.initialPosition.y,
+        // }));
+      } else if (canvasState.mode === CanvasMode.Resizing) {
         resizeSelectedLayer(current);
       }
 
