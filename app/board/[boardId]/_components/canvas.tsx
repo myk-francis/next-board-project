@@ -153,9 +153,18 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
       for (const id of self.presence.selection) {
         const layer = liveLayers.get(id);
+
+        if (layer) {
+          layer.update({
+            x: layer.get("x") + offselt.x,
+            y: layer.get("y") + offselt.y,
+          });
+        }
       }
+
+      setCanvasState({ mode: CanvasMode.Translating, current: point });
     },
-    []
+    [canvasState]
   );
 
   const onPointerMove = useMutation(
