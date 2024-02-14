@@ -18,7 +18,6 @@ export const SelectionTools = memo(
 
     const setFill = useMutation(
       ({ storage }, fill: Color) => {
-        // e.preventDefault();
         const liveLayers = storage.get("layers");
 
         setLastUsedColor(fill);
@@ -44,7 +43,7 @@ export const SelectionTools = memo(
           transform: `translate(calc(${x}px - 50%), calc(${y - 16}px - 100%))`,
         }}
       >
-        <ColorPicker onChange={() => {}} />
+        <ColorPicker onChange={setFill} />
       </div>
     );
   }
