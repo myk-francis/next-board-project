@@ -313,6 +313,27 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     [camera, canvasState.mode, setCanvasState, startDrawing]
   );
 
+  const insertPath = useMutation(
+    ({ storage, self, setMyPresence }) => {
+      const liveLayers = storage.get("layers");
+      const { pencilDraft } = self.presence;
+
+      if (
+        pencilDraft == null ||
+        pencilDraft.length < 2 ||
+        liveLayers.size >= MAX_LAYERS
+      ) {
+        setMyPresence({
+          pencilDraft: null,
+        });
+        return;
+      }
+
+      const id = nanoid();
+    },
+    [insertLayer]
+  );
+
   const onPointerUp = useMutation(
     ({}, e) => {
       // e.preventDefault();
@@ -325,6 +346,8 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       ) {
         unselectLayers();
         setCanvasState({ mode: CanvasMode.None });
+      } else if (canvasState.mode === CanvasMode.Pencil) {
+        insertPath();
       } else if (canvasState.mode === CanvasMode.Inserting) {
         insertLayer(canvasState.layerType, point);
       } else {
@@ -333,7 +356,15 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
       history.resume();
     },
-    [camera, canvasState, history, insertLayer, unselectLayers]
+    [
+      camera,
+      canvasState,
+      setCanvasState,
+      history,
+      insertLayer,
+      unselectLayers,
+      insertPath,
+    ]
   );
 
   const onLayerPointerDown = useMutation(
