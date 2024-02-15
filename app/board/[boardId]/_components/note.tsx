@@ -52,13 +52,15 @@ export const Note = ({
       onPointerDown={(e) => onPointerDown(e, id)}
       style={{
         outline: selectionColor ? `1px solid ${selectionColor}` : "none",
+        backgroundColor: fill ? colorToCssColor(fill) : "#000",
       }}
+      className="shadow-md drop-shadow-xl"
     >
       <ContentEditable
         html={value || "Text"}
         onChange={handleContentChange}
         className={cn(
-          "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
+          "h-full w-full flex items-center justify-center text-center outline-none",
           font.className
         )}
         style={{
