@@ -247,6 +247,15 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     []
   );
 
+  const startDrawing = useMutation(
+    ({ setMyPresence }, point: Point, presence: number) => {
+      setMyPresence({
+        cursor: null,
+      });
+    },
+    []
+  );
+
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
       const point = pointerEventToCanvasPoint(e, camera);
@@ -255,14 +264,17 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         return;
       }
 
-      //TODO: Add case for drawing
+      if (canvasState.mode === CanvasMode.Pencil) {
+        startDrawing(point, e.pressure);
+        return;
+      }
 
       setCanvasState({
         origin: point,
         mode: CanvasMode.Pressing,
       });
     },
-    [camera, canvasState.mode, setCanvasState]
+    [camera, canvasState.mode, setCanvasState, startDrawing]
   );
 
   const onPointerUp = useMutation(
