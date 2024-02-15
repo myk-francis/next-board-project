@@ -10,10 +10,10 @@ export type Camera = {
 };
 
 export enum LayerType {
-  Ellipse,
   Text,
   Path,
   Note,
+  Ellipse,
   Rectangle,
 }
 
