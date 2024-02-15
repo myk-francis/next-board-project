@@ -25,6 +25,7 @@ import {
 import { CursorsPresence } from "./cursors-presence";
 import {
   connectionIdToColor,
+  findIntersectingLayersWithRectangle,
   pointerEventToCanvasPoint,
   resizeBounds,
 } from "@/lib/utils";
@@ -197,8 +198,19 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         origin,
         current,
       });
+
+      const ids = findIntersectingLayersWithRectangle(
+        layerIds,
+        layers,
+        origin,
+        current
+      );
+
+      setMyPresence({
+        selection: ids,
+      });
     },
-    []
+    [layerIds]
   );
 
   const onPointerMove = useMutation(
