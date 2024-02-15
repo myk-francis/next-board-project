@@ -248,12 +248,13 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   );
 
   const startDrawing = useMutation(
-    ({ setMyPresence }, point: Point, presence: number) => {
+    ({ setMyPresence }, point: Point, pressure: number) => {
       setMyPresence({
-        cursor: null,
+        pencilDraft: [[point.x, point.y, pressure]],
+        penColor: lastUsedColor,
       });
     },
-    []
+    [lastUsedColor]
   );
 
   const onPointerDown = useCallback(
