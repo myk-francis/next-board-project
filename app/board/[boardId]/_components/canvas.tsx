@@ -338,6 +338,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       );
 
       const liveLayerIds = storage.get("layerIds");
+      liveLayerIds.push(id);
 
       setMyPresence({
         pencilDraft: null,
@@ -347,13 +348,11 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         mode: CanvasMode.Pencil,
       });
     },
-    [insertLayer]
+    [lastUsedColor]
   );
 
   const onPointerUp = useMutation(
     ({}, e) => {
-      // e.preventDefault();
-
       const point = pointerEventToCanvasPoint(e, camera);
 
       if (
