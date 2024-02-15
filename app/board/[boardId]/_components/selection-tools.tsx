@@ -8,7 +8,7 @@ import { ColorPicker } from "./color-picker";
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
-import { BringToFront, Trash2 } from "lucide-react";
+import { BringToFront, SendToBack, Trash2 } from "lucide-react";
 
 interface SelectionToolsProps {
   camera: Camera;
@@ -54,6 +54,11 @@ export const SelectionTools = memo(
           <Hint label="Bring to front">
             <Button variant="board" size={"icon"}>
               <BringToFront />
+            </Button>
+          </Hint>
+          <Hint label="Send to back">
+            <Button variant="board" size={"icon"}>
+              <SendToBack />
             </Button>
           </Hint>
         </div>
