@@ -40,6 +40,29 @@ export const SelectionTools = memo(
       [selection]
     );
 
+    const moveToFront = useMutation(
+      ({ storage }) => {
+        const liveLayerIds = storage.get("layerIds");
+        const indices: number[] = [];
+
+        const arr = liveLayerIds.toArray();
+
+        for (let i = 0; i < arr.length; i++) {
+          if (selection.includes(arr[i])) {
+            indices.push(i);
+          }
+        }
+
+        for (let i = indices.length - 1; i >= 0; i--) {
+          liveLayerIds.move(
+            indices[i],
+            arr.length - 1 - (indices.length - 1 - i)
+          );
+        }
+      },
+      [selection]
+    );
+
     const setFill = useMutation(
       ({ storage }, fill: Color) => {
         const liveLayers = storage.get("layers");
@@ -72,13 +95,13 @@ export const SelectionTools = memo(
         <ColorPicker onChange={setFill} />
         <div className="flex flex-col gap-y-0.5">
           <Hint label="Bring to front">
-            <Button variant="board" size={"icon"}>
+            <Button onClick={moveToFront} variant="board" size={"icon"}>
               <BringToFront />
             </Button>
           </Hint>
           <Hint label="Send to back">
-            <Button variant="board" size={"icon"}>
-              <SendToBack onClick={moveToBack} />
+            <Button onClick={moveToBack} variant="board" size={"icon"}>
+              <SendToBack />
             </Button>
           </Hint>
         </div>
