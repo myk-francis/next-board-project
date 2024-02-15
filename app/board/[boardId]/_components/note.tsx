@@ -1,4 +1,4 @@
-import { cn, colorToCssColor } from "@/lib/utils";
+import { cn, colorToCssColor, getContrastingTextColor } from "@/lib/utils";
 import { useMutation } from "@/liveblocks.config";
 import { NoteLayer } from "@/types/canvas";
 import { Kalam } from "next/font/google";
@@ -65,7 +65,7 @@ export const Note = ({
         )}
         style={{
           fontSize: calculateFontSize(width, height),
-          color: fill ? colorToCssColor(fill) : "#000",
+          color: fill ? getContrastingTextColor(fill) : "#000",
         }}
       />
     </foreignObject>
