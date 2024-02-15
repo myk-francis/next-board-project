@@ -1,6 +1,6 @@
 import { cn, colorToCssColor } from "@/lib/utils";
 import { useMutation } from "@/liveblocks.config";
-import { TextLayer } from "@/types/canvas";
+import { NoteLayer } from "@/types/canvas";
 import { Kalam } from "next/font/google";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 
@@ -18,19 +18,19 @@ const calculateFontSize = (width: number, height: number) => {
   return Math.min(fontSizeBasedOnHeight, fontSizeBasedOnWidth, maxFontSize);
 };
 
-interface TextProps {
+interface NoteProps {
   id: string;
-  layer: TextLayer;
+  layer: NoteLayer;
   onPointerDown: (e: React.PointerEvent, id: string) => void;
   selectionColor?: string;
 }
 
-export const Text = ({
+export const Note = ({
   id,
   layer,
   onPointerDown,
   selectionColor,
-}: TextProps) => {
+}: NoteProps) => {
   const { x, y, width, height, fill, value } = layer;
 
   const updateValue = useMutation(({ storage }, newValue: string) => {
