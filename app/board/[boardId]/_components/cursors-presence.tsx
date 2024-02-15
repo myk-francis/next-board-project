@@ -44,6 +44,8 @@ const Drafts = () => {
             />
           );
         }
+
+        return null;
       })}
     </>
   );
@@ -52,7 +54,7 @@ const Drafts = () => {
 export const CursorsPresence = memo(() => {
   return (
     <>
-      {/* TODO: Draft pencil */}
+      <Drafts />
       <Cursors />
     </>
   );
