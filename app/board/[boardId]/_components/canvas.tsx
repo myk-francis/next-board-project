@@ -26,6 +26,7 @@ import { CursorsPresence } from "./cursors-presence";
 import {
   connectionIdToColor,
   findIntersectingLayersWithRectangle,
+  penPointsToPathLayer,
   pointerEventToCanvasPoint,
   resizeBounds,
 } from "@/lib/utils";
@@ -330,6 +331,21 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       }
 
       const id = nanoid();
+
+      liveLayers.set(
+        id,
+        new LiveObject(penPointsToPathLayer(pencilDraft, lastUsedColor))
+      );
+
+      const liveLayerIds = storage.get("layerIds");
+
+      setMyPresence({
+        pencilDraft: null,
+      });
+
+      setCanvasState({
+        mode: CanvasMode.Pencil,
+      });
     },
     [insertLayer]
   );
