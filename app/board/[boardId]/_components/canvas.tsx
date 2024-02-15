@@ -39,6 +39,7 @@ import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tools";
 import { Path } from "./path";
 import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
+import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
 const MAX_LAYERS = 200;
 
@@ -70,6 +71,31 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   const canRedo = useCanRedo();
 
   useDisableScrollBounce();
+
+  const deleteLayers = useDeleteLayers();
+
+  React.useEffect(() => {
+    function onKeydown(e: KeyboardEvent) {
+      switch (e.key) {
+        case "z": {
+          if (e.ctrlKey || e.metaKey) {
+            if (e.shiftKey) {
+              history.redo();
+            } else {
+              history.undo();
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    document.addEventListener("keydown", onKeydown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeydown);
+    };
+  }, [deleteLayers, history]);
 
   const insertLayer = useMutation(
     (
