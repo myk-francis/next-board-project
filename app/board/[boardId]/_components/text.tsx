@@ -1,3 +1,4 @@
+import { cn, colorToCssColor } from "@/lib/utils";
 import { TextLayer } from "@/types/canvas";
 import { Kalam } from "next/font/google";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
@@ -33,7 +34,17 @@ export const Text = ({
         outline: selectionColor ? `1px solid ${selectionColor}` : "none",
       }}
     >
-      <ContentEditable html={"Text"} onChange={() => {}} />
+      <ContentEditable
+        html={"Text"}
+        onChange={() => {}}
+        className={cn(
+          "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
+          font.className
+        )}
+        style={{
+          color: fill ? colorToCssColor(fill) : "#000",
+        }}
+      />
     </foreignObject>
   );
 };
